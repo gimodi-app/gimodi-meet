@@ -1,0 +1,19 @@
+{
+  "name": "@gimodi/meet",
+  "version": "1.0.0",
+  "description": "Gimodi Meet - browser-based meeting client",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js --watch",
+    "serve": "node build.js && npx serve dist"
+  },
+  "dependencies": {
+    "marked": "^15.0.0",
+    "mediasoup-client": "^3.7.17"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}
