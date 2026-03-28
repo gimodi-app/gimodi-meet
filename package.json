@@ -1,6 +1,6 @@
 {
   "name": "@gimodi/meet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gimodi Meet - browser-based meeting client",
   "private": true,
   "type": "module",
