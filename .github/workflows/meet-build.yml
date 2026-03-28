@@ -2,13 +2,9 @@ name: Meet Build
 
 on:
   push:
-    paths:
-      - 'meet/**'
     tags:
       - 'v*'
   pull_request:
-    paths:
-      - 'meet/**'
 
 jobs:
   build:
@@ -21,26 +17,23 @@ jobs:
         with:
           node-version: 24
           cache: npm
-          cache-dependency-path: meet/package-lock.json
 
       - name: Install dependencies
-        working-directory: meet
         run: npm install
 
       - name: Build
-        working-directory: meet
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: gimodi-meet-dist
-          path: meet/dist/
+          path: dist/
           retention-days: 30
 
       - name: Package release archive
         if: startsWith(github.ref, 'refs/tags/v')
-        run: cd meet && tar -czf ../gimodi-meet-${{ github.ref_name }}.tar.gz -C dist .
+        run: tar -czf gimodi-meet-${{ github.ref_name }}.tar.gz -C dist .
 
       - name: Create release
         if: startsWith(github.ref, 'refs/tags/v')
