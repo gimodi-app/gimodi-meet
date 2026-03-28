@@ -1,4 +1,5 @@
 import { connection } from '../services/server.js';
+import { generateGuestIdentity } from '../services/identity.js';
 
 const joinScreen = document.getElementById('join-screen');
 const meetingScreen = document.getElementById('meeting-screen');
@@ -86,7 +87,7 @@ function showError(msg) {
 async function doJoin() {
   const nickname = nicknameInput.value.trim();
   if (!nickname) {
-    showError('Bitte gib einen Namen ein.');
+    showError('Please enter a name.');
     return;
   }
 
@@ -94,12 +95,13 @@ async function doJoin() {
   joinBtn.disabled = true;
 
   try {
-    const data = await connection.connect(serverAddress, inviteId, nickname);
+    const { publicKey } = await generateGuestIdentity(nickname);
+    const data = await connection.connect(serverAddress, inviteId, nickname, publicKey);
     joinScreen.classList.remove('active');
     meetingScreen.classList.add('active');
     window.dispatchEvent(new CustomEvent('meet:joined', { detail: data }));
   } catch (err) {
-    showError(err.message || 'Verbindung fehlgeschlagen.');
+    showError(err.message || 'Connection failed.');
   }
 }
 

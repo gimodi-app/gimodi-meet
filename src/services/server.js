@@ -23,9 +23,10 @@ class MeetConnection extends EventTarget {
    * @param {string} address
    * @param {string} inviteId
    * @param {string} nickname
+   * @param {string} publicKey
    * @returns {Promise<object>}
    */
-  connect(address, inviteId, nickname) {
+  connect(address, inviteId, nickname, publicKey) {
     return new Promise((resolve, reject) => {
       let url = address;
       if (!url.startsWith('ws://') && !url.startsWith('wss://')) {
@@ -51,7 +52,7 @@ class MeetConnection extends EventTarget {
 
       this.ws.onopen = async () => {
         try {
-          const data = await this.request('meet:join', { inviteId, nickname });
+          const data = await this.request('meet:join', { inviteId, nickname, publicKey });
           this.clientId = data.clientId;
           this.userId = data.userId;
           this.channelId = data.channelId;

@@ -28,9 +28,9 @@ class MeetVoiceService extends EventTarget {
    * Sets up the mediasoup Device and transports after joining a channel.
    */
   async setup() {
-    const { routerRtpCapabilities } = await connection.request('voice:get-rtp-capabilities');
+    const { rtpCapabilities } = await connection.request('voice:get-rtp-capabilities');
     this.device = new Device();
-    await this.device.load({ routerRtpCapabilities });
+    await this.device.load({ routerRtpCapabilities: rtpCapabilities });
 
     await connection.request('voice:rtp-capabilities', {
       rtpCapabilities: this.device.rtpCapabilities,

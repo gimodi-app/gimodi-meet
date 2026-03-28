@@ -155,7 +155,7 @@ function updateGridLayout() {
 function showScreenShare(clientId, track) {
   activeScreenShareClientId = clientId;
   const p = participants.get(clientId);
-  screenShareLabel.textContent = p ? `${p.nickname} teilt den Bildschirm` : 'Bildschirm wird geteilt';
+  screenShareLabel.textContent = p ? `${p.nickname} is sharing their screen` : 'Screen is being shared';
   screenShareVideo.srcObject = new MediaStream([track]);
   screenShareView.hidden = false;
   participantGrid.classList.add('with-screen-share');

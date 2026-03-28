@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "marked": "^15.0.0",
-    "mediasoup-client": "^3.7.17"
+    "mediasoup-client": "^3.7.17",
+    "openpgp": "^6.0.0"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
